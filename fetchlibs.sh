@@ -1,14 +1,10 @@
 #!/bin/bash -e
-
-function gpgv () {
-    return 0;
-}
-
 # taken from the QIRA project
 
 DEBOOTSTRAP_DIR=/usr/share/debootstrap
 UBUNTU_KEYRING=/usr/share/keyrings/ubuntu-archive-keyring.gpg
 DEBIAN_KEYRING=/usr/share/keyrings/debian-archive-keyring.gpg
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 if [ ! -d "$DEBOOTSTRAP_DIR" ] || [ ! -f "$DEBIAN_KEYRING" ]; then
   echo "this script requires debootstrap and debian-archive-keyring to be installed"
@@ -33,7 +29,7 @@ fetcharch() {
 
   mkdir -p "$TARGET" "$TARGET/debootstrap"
 
-  . $DEBOOTSTRAP_DIR/functions
+  . "${SCRIPT_DIR}/debootstrap/functions"
   . $DEBOOTSTRAP_DIR/scripts/$SUITE
 
   if [ $DISTRO == "ubuntu" ]; then
