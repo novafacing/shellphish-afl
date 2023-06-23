@@ -1,6 +1,8 @@
---- qemu_mode/build_qemu_support.sh 	2019-01-26 15:02:56.276349827 -0700
-+++ /qemu_mode/build_qemu_support.sh	2019-01-26 15:48:59.953197930 -0700
-@@ -22,6 +22,10 @@
+diff --git qemu_mode/build_qemu_support.sh qemu_mode/build_qemu_support.sh
+index 827c93d..23b5fdd 100755
+--- qemu_mode/build_qemu_support.sh
++++ qemu_mode/build_qemu_support.sh
+@@ -22,9 +22,13 @@
  # will be written to ../afl-qemu-trace.
  #
  
@@ -10,8 +12,12 @@
 +fi
  
  VERSION="2.10.0"
- QEMU_URL="http://download.qemu.org/qemu-${VERSION}.tar.xz"
-@@ -115,15 +119,11 @@
+-QEMU_URL="http://download.qemu-project.org/qemu-${VERSION}.tar.xz"
++QEMU_URL="http://download.qemu.org/qemu-${VERSION}.tar.xz"
+ QEMU_SHA384="68216c935487bc8c0596ac309e1e3ee75c2c4ce898aab796faa321db5740609ced365fedda025678d072d09ac8928105"
+ 
+ echo "================================================="
+@@ -115,15 +119,11 @@ echo "[*] Uncompressing archive (this will take a while)..."
  rm -rf "qemu-${VERSION}" || exit 1
  tar xf "$ARCHIVE" || exit 1
  
@@ -28,7 +34,7 @@
  cd qemu-$VERSION || exit 1
  
  echo "[*] Applying patches..."
-@@ -132,26 +132,40 @@
+@@ -132,26 +132,40 @@ patch -p1 <../patches/elfload.diff || exit 1
  patch -p1 <../patches/cpu-exec.diff || exit 1
  patch -p1 <../patches/syscall.diff || exit 1
  
@@ -80,7 +86,7 @@
  
  cd ..
  ls -l ../afl-qemu-trace || exit 1
-@@ -166,29 +180,29 @@
+@@ -166,29 +180,29 @@ if [ "$ORIG_CPU_TARGET" = "" ]; then
  
    make >/dev/null || exit 1
  
