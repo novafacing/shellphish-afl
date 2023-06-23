@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+function gpgv () {
+    return 0;
+}
+
 # taken from the QIRA project
 
 DEBOOTSTRAP_DIR=/usr/share/debootstrap
