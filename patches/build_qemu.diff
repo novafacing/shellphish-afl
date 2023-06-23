@@ -10,7 +10,7 @@
 +fi
  
  VERSION="2.10.0"
- QEMU_URL="http://download.qemu-project.org/qemu-${VERSION}.tar.xz"
+ QEMU_URL="http://download.qemu.org/qemu-${VERSION}.tar.xz"
 @@ -115,15 +119,11 @@
  rm -rf "qemu-${VERSION}" || exit 1
  tar xf "$ARCHIVE" || exit 1
